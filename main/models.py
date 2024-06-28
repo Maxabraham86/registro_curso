@@ -16,7 +16,24 @@ class Estudiante(models.Model):
     
 
 class Direccion(models.Model):
-    regiones= (('iii','Atacama'),('v','Valparaiso'),('ix', 'Araucania'),('vi', "O'Higgins"))
+    regiones = (
+('i', 'Tarapacá'),
+('ii', 'Antofagasta'),
+('iii', 'Atacama'),
+('iv', 'Coquimbo'),
+('v', 'Valparaíso'),
+('vi', "O'Higgins"),
+('vii', 'Maule'),
+('viii', 'Ñuble'),
+('ix', 'Biobío'),
+('x', 'La Araucanía'),
+('xi', 'Los Ríos'),
+('xii', 'Los Lagos'),
+('xiv', 'Los Ríos'),
+('xv', 'Aysén'),
+('xvi', 'Magallanes y de la Antártica Chilena'),
+('rm', 'Región Metropolitana de Santiago')
+)
     calle= models.CharField(max_length=50)
     numero= models.CharField(max_length=10)
     comuna= models.CharField(max_length=50)
