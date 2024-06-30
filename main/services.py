@@ -14,12 +14,18 @@ def crear_estudiante(rut, nombre, apellido,fecha_nac):
         fecha_nac=fecha_nac,
         activo=True,
         created=date.today(),
-        updated=date.today())
+        updated=date.today()
+        )
     estudiante.save()
 
 
 def crear_profesor(rut, nombre, apellido):
-    profesor=Profesor(rut=rut, nombre=nombre, apellido=apellido, created=date.today(), updated=date.today())
+    profesor=Profesor(rut=rut, 
+                    nombre=nombre,
+                    apellido=apellido,
+                    created=date.today(null=True),
+                    updated=date.today(null=True)
+                    )
     profesor.save()
 
 
@@ -48,13 +54,48 @@ def agregar_profesor_a_curso(profesor_rut, curso_codigo):
     c.profesor=p
     c.save()
 
+def agregar_direccion(calle,numero,comuna,region,estudiante_rut):
+    estudiante = Estudiante.objects.get(rut=estudiante_rut)
+    d= Direccion(calle=calle, numero=numero,comuna=comuna, region=region, estudiante=estudiante)
+    d.save()
+    
+    
+def obtiene_estudiante(estudiante_rut):
+    e=Estudiante.objects.get(rut=estudiante_rut)
+    print(e)
+    
+def obtiene_profesor(profesor_rut):
+    
+        p=Profesor.objects.get(rut=profesor_rut)
+    
+        print(p)
+    
+def obtiene_direccion(estudiante_rut):
+    estudiante=Estudiante.objects.get(rut=estudiante_rut)
+    
+    direccion=Direccion.objects.filter(estudiante=estudiante).first()
+    if direccion:
+        print(direccion)
+    else:
+        print ('no hay direccion para el estudiante con Rut {estudiante_rut}')
 
+def listar_profesores(profesor_rut):
+    p=Profesor.objects.all()
+    print(p)
 
-# ● crear_direccion 
-
-# ● obtiene_estudiante 
-# ● obtiene_profesor 
-# ● obtiene_curso 
-# ● agrega_profesor_a_curso 
-# ● agrega_cursos_a_estudiante 
+def imprime_estudiante_curso(estudiante_rut):
+    try:
+        estudiante = Estudiante.objects.get(rut= estudiante_rut)
+        cursos=Curso.objects.filter(estudiante_rut=curso)
+        print(f'Estudiante:{estudiante.nombre} {estudiante.apellido} (Rut {estudiante_rut})')
+        if cursos:
+            for curso in cursos:
+                print(f'  - {curso.nombre} (codigo: {curso.codigo}, Version: { curso.version})')
+        else:
+                print ('No está inscrito en ningun curso.')
+    except Estudiante.DoesNotExist:
+        print (f'No se encontró un estudiante con el Rut {estudiante_rut}')
+                
+                
+    
 # ● imprime_estudiante_cursos 

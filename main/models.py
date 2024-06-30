@@ -53,6 +53,8 @@ class Profesor(models.Model):
     created = models.DateField(auto_now_add=True)
     updated= models.DateField(auto_now=True)
 
+    def __str__(self):
+        return f'{self.nombre} {self.apellido}'
 
 class Curso(models.Model):
     codigo=models.CharField(max_length=10, primary_key=True)
