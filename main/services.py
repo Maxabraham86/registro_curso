@@ -86,7 +86,7 @@ def listar_profesores(profesor_rut):
 def imprime_estudiante_curso(estudiante_rut):
     try:
         estudiante = Estudiante.objects.get(rut= estudiante_rut)
-        cursos=Curso.objects.filter(estudiante_rut=curso)
+        cursos= estudiante.cursos.all()
         print(f'Estudiante:{estudiante.nombre} {estudiante.apellido} (Rut {estudiante_rut})')
         if cursos:
             for curso in cursos:
